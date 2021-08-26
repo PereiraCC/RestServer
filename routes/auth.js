@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 // const { esRoleValido, emailExiste, existeUsuarioPorId } = require('../helpers/db-validators');
 
-const { login } = require('../controllers/auth');
+const { login, googleSinging } = require('../controllers/auth');
 
 const router = Router();
 
@@ -14,6 +14,11 @@ router.post('/login', [
     check('password', 'La contraseña es obligatoria').not().isEmpty(),
     validarCampos
 ], login );
+
+router.post('/google', [
+    check('id_token', 'El id_token es necesario').not().isEmpty(),
+    validarCampos
+], googleSinging );
 
 
 module.exports = router;
